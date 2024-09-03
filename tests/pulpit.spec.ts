@@ -35,4 +35,24 @@ test.describe('Pulpit tests', () => {
       'Doładowanie wykonane! 50,00PLN na numer 503 xxx xxx'
     );
   });
+
+  test('payment with correct data', async ({ page }) => {
+    await page.goto('https://demo-bank.vercel.app/');
+    await page.getByTestId('login-input').fill('testerLO');
+    await page.getByTestId('password-input').fill('password');
+    await page.getByTestId('login-button').click();
+
+    await page.getByRole('link', { name: 'płatności' }).click();
+    await page.getByTestId('transfer_receiver').fill("Marlena X");
+    await page.getByTestId('form_account_to').fill('02 000 0000 0000 0000 0000 0');
+    await page.getByTestId('form_amount').fill('150');
+    await page.getByTestId('form_title').fill('pizza');
+    await page.getByLabel('ekspresowy').check();
+    await page.getByRole('button', { name: 'wykonaj' }).click();
+    await page.getByTestId('close-button').click();
+
+    await expect(page.locator('.ui-dialog-title')).toHaveText(
+      'Przelew wykonany'
+    );
+  });
 });

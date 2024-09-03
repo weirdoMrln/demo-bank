@@ -2,7 +2,6 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Pulpit tests", () => {
   test("quick payment with correct data", async ({ page }) => {
-    
     // Arrange
     const URL = "https://demo-bank.vercel.app/";
     const USERID = "testerLO";
@@ -11,14 +10,16 @@ test.describe("Pulpit tests", () => {
     const TransferReciever = "2";
     const TransferAmount = "150";
     const TransferTitle = "pizza";
-    
+
     // Act
     await page.goto(URL);
     await page.getByTestId("login-input").fill(USERID);
     await page.getByTestId("password-input").fill(USERPASS);
     await page.getByTestId("login-button").click();
 
-    await page.locator("#widget_1_transfer_receiver").selectOption(TransferReciever);
+    await page
+      .locator("#widget_1_transfer_receiver")
+      .selectOption(TransferReciever);
     await page.locator("#widget_1_transfer_amount").fill(TransferAmount);
     await page.locator("#widget_1_transfer_title").fill(TransferTitle);
     await page.getByRole("button", { name: "wykonaj" }).click();
@@ -27,12 +28,11 @@ test.describe("Pulpit tests", () => {
 
     // Assert
     await expect(page.locator("#show_messages")).toHaveText(
-      `Przelew wykonany! ${USER_NAME} - ${TransferAmount},00PLN - ${TransferTitle}`
+      `Przelew wykonany! ${USER_NAME} - ${TransferAmount},00PLN - ${TransferTitle}`,
     );
   });
 
   test("successful mobile top-up", async ({ page }) => {
-
     // Arrange
     const URL = "https://demo-bank.vercel.app/";
     const USERID = "testerLO";
@@ -54,7 +54,7 @@ test.describe("Pulpit tests", () => {
 
     // Assert
     await expect(page.locator("#show_messages")).toHaveText(
-      `Doładowanie wykonane! ${TopUpAmount},00PLN na numer ${TopUpReciever}`
+      `Doładowanie wykonane! ${TopUpAmount},00PLN na numer ${TopUpReciever}`,
     );
   });
 
@@ -85,7 +85,7 @@ test.describe("Pulpit tests", () => {
 
     // Assert
     await expect(page.locator(".ui-dialog-title")).toHaveText(
-      "Przelew wykonany"
+      "Przelew wykonany",
     );
   });
 });

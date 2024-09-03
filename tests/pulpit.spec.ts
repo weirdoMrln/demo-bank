@@ -6,7 +6,7 @@ test.describe("Pulpit tests", () => {
     const URL = "https://demo-bank.vercel.app/";
     const USERID = "testerLO";
     const USERPASS = "10987654";
-    const USER_NAME = "Jan Demobankowy";
+    const USER_NAME = "Chuck Demobankowy";
     const TransferReciever = "2";
     const TransferAmount = "150";
     const TransferTitle = "pizza";
@@ -22,12 +22,12 @@ test.describe("Pulpit tests", () => {
       .selectOption(TransferReciever);
     await page.locator("#widget_1_transfer_amount").fill(TransferAmount);
     await page.locator("#widget_1_transfer_title").fill(TransferTitle);
-    await page.getByRole("button", { name: "wykonaj" }).click();
-    await page.locator("close-button").isVisible();
-    await page.locator("close-button").click();
+    await page.locator("#widget_1_transfer_title").click();
+    await page.locator("#execute_btn").click();
+    await page.getByTestId("close-button").click();
 
     // Assert
-    await expect(page.locator("#show_messages")).toHaveText(
+    await expect(page.locator(".grid-30")).toHaveText(
       `Przelew wykonany! ${USER_NAME} - ${TransferAmount},00PLN - ${TransferTitle}`,
     );
   });

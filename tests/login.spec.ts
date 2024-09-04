@@ -1,15 +1,23 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("User login to Demobank", () => {
-  test("successful login with correct credentials", async ({ page }) => {
-    // Arrange
+
+  const USERID = "testerLO";
+  const USERPASS = "10987654";
+  const WRONG_USERID = "tester";
+  const WRONG_USERPASS = "1234";
+
+  test.beforeEach(async ({ page }) => {
     const URL = "https://demo-bank.vercel.app/";
-    const USERID = "testerLO";
-    const USERPASS = "10987654";
+    await page.goto(URL);
+  })
+
+  test("successful login with correct credentials", async ({ page }) => {
+    
+    // Arrange
     const USER_NAME = "Jan Demobankowy";
 
     // Act
-    await page.goto(URL);
     await page.getByTestId("login-input").fill(USERID);
     await page.getByTestId("password-input").fill(USERPASS);
     await page.getByTestId("login-button").click();
@@ -20,14 +28,11 @@ test.describe("User login to Demobank", () => {
   });
 
   test("unsuccessful login with too short username", async ({ page }) => {
-    // Arrange
-    const URL = "https://demo-bank.vercel.app/";
-    const WRONG_USERID = "tester";
-
+    
     // Act
-    await page.goto(URL);
     await page.getByTestId("login-input").fill(WRONG_USERID);
     await page.getByTestId("password-input").click();
+    await page.getByTestId("password-input").fill(USERPASS);
     await page.getByTestId("error-login-id").click();
 
     // Assert
@@ -37,13 +42,8 @@ test.describe("User login to Demobank", () => {
   });
 
   test("unsuccessful login with too short password", async ({ page }) => {
-    // Arrange
-    const URL = "https://demo-bank.vercel.app/";
-    const USERID = "testerLO";
-    const WRONG_USERPASS = "1234";
 
     // Act
-    await page.goto(URL);
     await page.getByTestId("login-input").fill(USERID);
     await page.getByTestId("password-input").click();
     await page.getByTestId("password-input").fill(WRONG_USERPASS);

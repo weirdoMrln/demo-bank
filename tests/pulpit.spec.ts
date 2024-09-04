@@ -1,22 +1,28 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Pulpit tests", () => {
-  test("quick payment with correct data", async ({ page }) => {
-    // Arrange
-    const URL = "https://demo-bank.vercel.app/";
-    const USERID = "testerLO";
-    const USERPASS = "10987654";
-    const USER_NAME = "Chuck Demobankowy";
-    const TransferReciever = "2";
-    const TransferAmount = "150";
-    const TransferTitle = "pizza";
 
-    // Act
+  const URL = "https://demo-bank.vercel.app/";
+  const USERID = "testerLO";
+  const USERPASS = "10987654";
+  const TransferAmount = "150";
+  const TransferTitle = "pizza";
+
+  test.beforeEach(async ({ page }) => {
     await page.goto(URL);
     await page.getByTestId("login-input").fill(USERID);
     await page.getByTestId("password-input").fill(USERPASS);
     await page.getByTestId("login-button").click();
+  });
 
+
+  test("quick payment with correct data", async ({ page }) => {
+    
+    // Arrange
+    const USER_NAME = "Chuck Demobankowy";
+    const TransferReciever = "2";
+
+    // Act
     await page
       .locator("#widget_1_transfer_receiver")
       .selectOption(TransferReciever);
@@ -33,19 +39,12 @@ test.describe("Pulpit tests", () => {
   });
 
   test("successful mobile top-up", async ({ page }) => {
+   
     // Arrange
-    const URL = "https://demo-bank.vercel.app/";
-    const USERID = "testerLO";
-    const USERPASS = "10987654";
     const TopUpReciever = "503 xxx xxx";
     const TopUpAmount = "50";
 
     // Act
-    await page.goto(URL);
-    await page.getByTestId("login-input").fill(USERID);
-    await page.getByTestId("password-input").fill(USERPASS);
-    await page.getByTestId("login-button").click();
-
     await page.locator("#widget_1_topup_receiver").selectOption(TopUpReciever);
     await page.locator("#widget_1_topup_amount").fill(TopUpAmount);
     await page.locator("#uniform-widget_1_topup_agreement span").click();
@@ -59,26 +58,17 @@ test.describe("Pulpit tests", () => {
   });
 
   test("payment with correct data", async ({ page }) => {
+   
     // Arrange
-    const URL = "https://demo-bank.vercel.app/";
-    const USERID = "testerLO";
-    const USERPASS = "10987654";
     const TransferReciever = "Marlena X";
     const AccountNumber = "02 000 0000 0000 0000 0000 0";
-    const Amount = "150";
-    const Title = "pizza";
 
     // Act
-    await page.goto(URL);
-    await page.getByTestId("login-input").fill(USERID);
-    await page.getByTestId("password-input").fill(USERPASS);
-    await page.getByTestId("login-button").click();
-
     await page.getByRole("link", { name: "płatności" }).click();
     await page.getByTestId("transfer_receiver").fill(TransferReciever);
     await page.getByTestId("form_account_to").fill(AccountNumber);
-    await page.getByTestId("form_amount").fill(Amount);
-    await page.getByTestId("form_title").fill(Title);
+    await page.getByTestId("form_amount").fill(TransferAmount);
+    await page.getByTestId("form_title").fill(TransferTitle);
     await page.getByLabel("ekspresowy").check();
     await page.getByRole("button", { name: "wykonaj" }).click();
     await page.getByTestId("close-button").click();

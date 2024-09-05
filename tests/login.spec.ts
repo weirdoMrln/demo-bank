@@ -2,13 +2,11 @@ import { test, expect } from "@playwright/test";
 import { loginData } from "../test-data/login.data";
 
 test.describe("User login to Demobank", () => {
-
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
   test("successful login with correct credentials", async ({ page }) => {
-
     // Act
     await page.getByTestId("login-input").fill(loginData.userId);
     await page.getByTestId("password-input").fill(loginData.userPass);
@@ -28,7 +26,7 @@ test.describe("User login to Demobank", () => {
 
     // Assert
     await expect(page.getByTestId("error-login-id")).toHaveText(
-      "identyfikator ma min. 8 znaków",
+      "identyfikator ma min. 8 znaków"
     );
   });
 
@@ -41,7 +39,7 @@ test.describe("User login to Demobank", () => {
 
     // Assert
     await expect(page.getByTestId("error-login-password")).toHaveText(
-      "hasło ma min. 8 znaków",
+      "hasło ma min. 8 znaków"
     );
   });
 });

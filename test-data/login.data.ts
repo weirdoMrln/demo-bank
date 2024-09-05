@@ -3,5 +3,5 @@ export const loginData = {
   userName: "Jan Demobankowy",
   userPass: "12345678",
   wrongUserId: "tester",
-  wrongUserPass: "1234567"
+  wrongUserPass: "1234567",
 };

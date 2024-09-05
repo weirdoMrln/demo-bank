@@ -1,35 +1,29 @@
 import { test, expect } from "@playwright/test";
+import { loginData } from "../test-data/login.data";
 
 test.describe("User login to Demobank", () => {
-  const USERID = "testerLO";
-  const USERPASS = "12345678";
 
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
   test("successful login with correct credentials", async ({ page }) => {
-    // Arrange
-    const USER_NAME = "Jan Demobankowy";
 
     // Act
-    await page.getByTestId("login-input").fill(USERID);
-    await page.getByTestId("password-input").fill(USERPASS);
+    await page.getByTestId("login-input").fill(loginData.userId);
+    await page.getByTestId("password-input").fill(loginData.userPass);
     await page.getByTestId("login-button").click();
     await page.getByTestId("user-name").click();
 
     // Assert
-    await expect(page.getByTestId("user-name")).toHaveText(USER_NAME);
+    await expect(page.getByTestId("user-name")).toHaveText(loginData.userName);
   });
 
   test("unsuccessful login with too short username", async ({ page }) => {
-    // Arrange
-    const WRONG_USERID = "tester";
-
     // Act
-    await page.getByTestId("login-input").fill(WRONG_USERID);
+    await page.getByTestId("login-input").fill(loginData.wrongUserId);
     await page.getByTestId("password-input").click();
-    await page.getByTestId("password-input").fill(USERPASS);
+    await page.getByTestId("password-input").fill(loginData.userPass);
     await page.getByTestId("error-login-id").click();
 
     // Assert
@@ -39,13 +33,10 @@ test.describe("User login to Demobank", () => {
   });
 
   test("unsuccessful login with too short password", async ({ page }) => {
-    // Arrange
-    const WRONG_USERPASS = "1234";
-
     // Act
-    await page.getByTestId("login-input").fill(USERID);
+    await page.getByTestId("login-input").fill(loginData.userId);
     await page.getByTestId("password-input").click();
-    await page.getByTestId("password-input").fill(WRONG_USERPASS);
+    await page.getByTestId("password-input").fill(loginData.wrongUserPass);
     await page.getByTestId("password-input").blur();
 
     // Assert

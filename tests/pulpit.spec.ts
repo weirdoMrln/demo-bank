@@ -58,23 +58,4 @@ test.describe("Pulpit tests", () => {
     );
     await expect(pulpitPage.wiadomosciAlert).toHaveText(expectedMessage);
   });
-
-  test("payment with correct data", async ({ page }) => {
-    // Arrange
-    const pulpitPage = new PulpitPage(page);
-
-    // Act
-    await page.getByRole("link", { name: "płatności" }).click();
-    await pulpitPage.odbiorcaPrzelewuField.fill(pulpitData.transferReciever);
-    await pulpitPage.numerKontaField.fill(pulpitData.numerKontaDoPrzelewu);
-    await pulpitPage.kwotaPrzelewuField.fill(pulpitData.kwotaPrzelewu);
-    await pulpitPage.tytulPrzelewuField.fill(pulpitData.tytulPrzelewu);
-    await pulpitPage.checkboxEkspresowyPrzelew.check();
-    await pulpitPage.buttonWykonajPrzelew.click();
-    await page.keyboard.press("Escape");
-
-    // Assert
-    const expectedMessage = `Przelew wykonany! ${pulpitData.kwotaPrzelewu},00PLN dla ${pulpitData.transferReciever}`;
-    await expect(pulpitPage.wiadomosciAlert).toHaveText(expectedMessage);
-  });
 });

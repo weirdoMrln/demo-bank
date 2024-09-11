@@ -4,6 +4,7 @@ import { paymentData } from "../test-data/payment.data";
 import { LoginPage } from "../pages/login.page";
 import { PulpitPage } from "../pages/pulpit.page";
 import { PaymentPage } from "../pages/payment.page";
+import { SideMenuComponent } from "../components/side-menu.components";
 
 test.describe("Payment tests", () => {
   test.beforeEach(async ({ page }) => {
@@ -15,9 +16,9 @@ test.describe("Payment tests", () => {
     // Arrange
     const pulpitPage = new PulpitPage(page);
     const paymentPage = new PaymentPage(page);
-
+    
     // Act
-    await page.getByRole("link", { name: "płatności" }).click();
+    await pulpitPage.sideMenu.platnosciTab.click();
     await paymentPage.odbiorcaPrzelewuField.fill(paymentData.transferReceiver);
     await paymentPage.numerKontaField.fill(paymentData.accountNumber);
     await paymentPage.kwotaPrzelewuField.fill(paymentData.amount);

@@ -1,7 +1,11 @@
 import { expect, Page } from "@playwright/test";
+import { SideMenuComponent } from "../components/side-menu.components";
 
 export class PulpitPage {
   constructor(private page: Page) {}
+
+  sideMenu = new SideMenuComponent(this.page);
+
   // Szybki Przelew (main page)
   odbiorcaPrzelewu = this.page.locator("#widget_1_transfer_receiver");
   kwotaPrzelewu = this.page.locator("#widget_1_transfer_amount");
@@ -20,4 +24,6 @@ export class PulpitPage {
 
   // saldo konta
   saldoKonta = this.page.locator("#money_value.value-wrapper");
+
+  
 }

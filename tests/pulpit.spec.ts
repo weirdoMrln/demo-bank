@@ -6,17 +6,17 @@ import { BasePage } from "../pages/base.page";
 import { PulpitPage } from "../pages/pulpit.page";
 
 test.describe("Pulpit tests", () => {
+  let pulpitPage: PulpitPage;
+  let basePage: BasePage;
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
+    pulpitPage = new PulpitPage(page);  
+    basePage = new BasePage(page);
     await loginPage.login(loginData.userId, loginData.userPass);
   });
 
   test("quick payment with correct data", async ({ page }) => {
-    // Arrange
-    const pulpitPage = new PulpitPage(page);
-    const basePage = new BasePage(page);
-
-    // Act
+// Act
     await pulpitPage.odbiorcaPrzelewu.selectOption(pulpitData.odbiorcaPrzelewu);
     await pulpitPage.kwotaPrzelewu.fill(pulpitData.kwotaPrzelewu);
     await pulpitPage.tytulPrzelewu.fill(pulpitData.tytulPrzelewu);
@@ -30,8 +30,6 @@ test.describe("Pulpit tests", () => {
   });
 
   test("correct balance after successful mobile top-up", async ({ page }) => {
-    const basePage = new BasePage(page);
-    const pulpitPage = new PulpitPage(page);
     // Act
     await pulpitPage.odbiorcaDoladowania.selectOption(pulpitData.numerTel);
     await pulpitPage.kwotaDoladowania.fill(pulpitData.kwotaDoladowania);

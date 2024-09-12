@@ -16,19 +16,19 @@ test.describe("Payment tests", () => {
     // Arrange
     const pulpitPage = new PulpitPage(page);
     const paymentPage = new PaymentPage(page);
-    
+
     // Act
     await pulpitPage.sideMenu.platnosciTab.click();
-    await paymentPage.odbiorcaPrzelewuField.fill(paymentData.transferReceiver);
-    await paymentPage.numerKontaField.fill(paymentData.accountNumber);
-    await paymentPage.kwotaPrzelewuField.fill(paymentData.amount);
-    await paymentPage.tytulPrzelewuField.fill(paymentData.title);
-    await paymentPage.checkboxEkspresowyPrzelew.check();
-    await paymentPage.buttonWykonajPrzelew.click();
+    await paymentPage.zrobPrzelew(
+      paymentData.transferReceiver,
+      paymentData.accountNumber,
+      paymentData.amount,
+      paymentData.title
+    );
     await page.keyboard.press("Escape");
 
     // Assert
     const expectedMessage = `Przelew wykonany! ${paymentData.amount},00PLN dla ${paymentData.transferReceiver}`;
     await expect(pulpitPage.wiadomosciAlert).toHaveText(expectedMessage);
   });
-  });
+});

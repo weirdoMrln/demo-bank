@@ -10,18 +10,18 @@ test.describe("Pulpit tests", () => {
   let basePage: BasePage;
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
-    pulpitPage = new PulpitPage(page);  
+    pulpitPage = new PulpitPage(page);
     basePage = new BasePage(page);
     await loginPage.login(loginData.userId, loginData.userPass);
   });
 
   test("quick payment with correct data", async ({ page }) => {
-// Act
+    // Act
     await pulpitPage.odbiorcaPrzelewu.selectOption(pulpitData.odbiorcaPrzelewu);
     await pulpitPage.kwotaPrzelewu.fill(pulpitData.kwotaPrzelewu);
     await pulpitPage.tytulPrzelewu.fill(pulpitData.tytulPrzelewu);
     await pulpitPage.buttonWykonajSzybkiPrzelew.click();
-    await page.keyboard.press("Escape");
+    // await page.keyboard.press("Escape");
 
     // Assert
     const actualText = pulpitPage.wiadomosciAlert.innerText();

@@ -25,5 +25,14 @@ export class PulpitPage {
   // saldo konta
   saldoKonta = this.page.locator("#money_value.value-wrapper");
 
-  
+  async quickPayment(
+    odbiorcaPrzelewu: string,
+    kwotaPrzelewu: string,
+    tytulPrzelewu: string
+  ): Promise<void> {
+    await this.odbiorcaPrzelewu.selectOption(odbiorcaPrzelewu);
+    await this.kwotaPrzelewu.fill(kwotaPrzelewu);
+    await this.tytulPrzelewu.fill(tytulPrzelewu);
+    await this.buttonWykonajSzybkiPrzelew.click();
+  }
 }

@@ -12,7 +12,7 @@ test.describe("Payment tests", () => {
     await loginPage.login(loginData.userId, loginData.userPass);
   });
 
-  test("simple payment", async ({ page }) => {
+  test("simple payment", {tag: '@payment @integration'}, async ({ page }) => {
     // Arrange
     const pulpitPage = new PulpitPage(page);
     const paymentPage = new PaymentPage(page);

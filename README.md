@@ -3,6 +3,7 @@
 
 - test site https://demo-bank.vercel.app/  
 - code repository https://github.com/weirdoMrln/demo-bank
+- Trello board connected with project: https://trello.com/b/k90C2bYr/automated-testsdemo-bank
 
 ## Commands
 

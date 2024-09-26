@@ -20,7 +20,7 @@ test.describe("Pulpit tests", () => {
     {
       tag: ["@Pulpit", "@Payment", "@E2E"],
       annotation: {
-        type: "smoke",
+        type: "details",
         description:
           "https://trello.com/c/Y7tEAVqT/2-at-090-pulpit-quick-payment-with-correct-data-szybki-przelew",
       },
@@ -45,7 +45,7 @@ test.describe("Pulpit tests", () => {
     {
       tag: ["@Pulpit", "@Payment", "@E2E"],
       annotation: {
-        type: "smoke",
+        type: "details",
         description:
           "https://trello.com/c/JGqHUeoz/4-at-091-pulpit-correct-balance-after-successful-mobile-top-up-do%C5%82adowianie-telefonu",
       },

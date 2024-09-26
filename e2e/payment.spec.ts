@@ -14,8 +14,8 @@ test.describe("Payment tests", () => {
   test(
     "simple payment",
     {
-      tag: ["@payment", "@integration"],
-      annotation: { type: "smoke", description: "simple payment" },
+      tag: ["@Payment", "@Components", "@E2E"],
+      annotation: { type: "details", description: "https://trello.com/c/kaC86KGO/8-at-095-simple-payment-from-p%C5%82atno%C5%9Bci-tab" },
     },
     async ({ page }) => {
       // Arrange

@@ -4,7 +4,6 @@ import { paymentData } from "../test-data/payment.data";
 import { LoginPage } from "../pages/login.page";
 import { PulpitPage } from "../pages/pulpit.page";
 import { PaymentPage } from "../pages/payment.page";
-import { SideMenuComponent } from "../components/side-menu.components";
 
 test.describe("Payment tests", () => {
   test.beforeEach(async ({ page }) => {

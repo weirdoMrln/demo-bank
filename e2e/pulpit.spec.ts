@@ -16,8 +16,15 @@ test.describe("Pulpit tests", () => {
   });
 
   test(
-    "quick payment with correct data",
-    { tag: "@pulpit @payment" },
+    "Quick payment with correct data",
+    {
+      tag: ["@Pulpit", "@Payment", "@E2E"],
+      annotation: {
+        type: "smoke",
+        description:
+          "https://trello.com/c/Y7tEAVqT/2-at-090-pulpit-quick-payment-with-correct-data-szybki-przelew",
+      },
+    },
     async ({ page }) => {
       // Act
       await pulpitPage.quickPayment(
@@ -35,7 +42,14 @@ test.describe("Pulpit tests", () => {
 
   test(
     "correct balance after successful mobile top-up",
-    { tag: "@pulpit @payment" },
+    {
+      tag: ["@Pulpit", "@Payment", "@E2E"],
+      annotation: {
+        type: "smoke",
+        description:
+          "https://trello.com/c/JGqHUeoz/4-at-091-pulpit-correct-balance-after-successful-mobile-top-up-do%C5%82adowianie-telefonu",
+      },
+    },
     async ({ page }) => {
       // Act
       await pulpitPage.odbiorcaDoladowania.selectOption(pulpitData.numerTel);
